@@ -1,0 +1,31 @@
+<div>
+    <oj-toolbar>
+        <oj-c-button 
+            label="Nuevo"
+            chroming="callToAction"
+            display="[[smScreen() ? 'icons' : 'all']]">
+            <span slot="startIcon">
+                <i class="oj-ux-ico-plus"></i>
+            </span>
+        </oj-c-button>
+        <oj-c-button 
+            label="Editar"
+            chroming="outlined"
+            display="[[smScreen() ? 'icons' : 'all']]">
+            <span slot="startIcon" class="btn-edit">
+                <i class="oj-ux-ico-edit-box"></i>
+            </span>
+        </oj-c-button>
+    </oj-toolbar>
+    <oj-table 
+        class="app-table demo-table-container" 
+        columns="[[columns]]"
+        display="grid"
+        selection-mode.row="single"
+        columns-default.sortable="disabled">
+        <template slot="noData"></template>
+    </oj-table>
+</div>
+
+
+

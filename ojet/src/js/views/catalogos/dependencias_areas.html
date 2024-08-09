@@ -1,0 +1,163 @@
+<div>
+    <oj-collapsible>
+        <span 
+            class="oj-typography-body-lg oj-typography-semi-bold" 
+            slot="header">
+            Dependencias
+        </span>
+        <oj-toolbar>
+            <oj-c-button 
+                label="Nuevo"
+                chroming="callToAction"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onNewDependencia]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-plus"></i>
+                </span>
+            </oj-c-button>
+            <oj-c-button 
+                label="Editar"
+                chroming="outlined"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onEditDependencia]]">
+                <span slot="startIcon" class="btn-edit">
+                    <i class="oj-ux-ico-edit-box"></i>
+                </span>
+            </oj-c-button>
+        </oj-toolbar>
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[dependenciasDP]]"
+            display="grid"
+            selected="{{selectedDependencia}}"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData"></template>
+        </oj-table>
+    </oj-collapsible>
+    
+    <oj-collapsible>
+        <span 
+            class="oj-typography-body-lg oj-typography-semi-bold" 
+            slot="header">
+            Áreas
+        </span>
+        <oj-toolbar>
+            <oj-c-button 
+                label="Nuevo"
+                chroming="callToAction"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onNewArea]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-plus"></i>
+                </span>
+            </oj-c-button>
+            <oj-c-button 
+                label="Editar"
+                chroming="outlined"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onEditArea]]">
+                <span slot="startIcon" class="btn-edit">
+                    <i class="oj-ux-ico-edit-box"></i>
+                </span>
+            </oj-c-button>
+        </oj-toolbar>
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[areasDP]]"
+            display="grid"
+            selected="{{selectedArea}}"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData"></template>
+        </oj-table>
+    </oj-collapsible>
+    
+    
+    <oj-dialog
+        id="dlg-configDep" 
+        dialog-title="[[dialogTitle]]">
+        <div slot="body">
+            <oj-validation-group id="tracker">
+                <oj-form-layout
+                    columns="1"
+                    user-assistance-density="compact"
+                    class="oj-formlayout-full-width">
+                    <oj-c-input-text
+                        label-hint="Clave"
+                        value="{{dependencia.clave}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre"
+                        value="{{dependencia.nombre}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-switch
+                        label-hint="Estatus"
+                        value="{{dependencia.estatus}}">
+                    </oj-switch>
+                </oj-form-layout>
+            </oj-validation-group>
+        </div>
+        <div slot="footer">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-configDep" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Guardar"
+                    chroming="callToAction">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-dialog>
+    
+    
+    <oj-dialog
+        id="dlg-configArea" 
+        dialog-title="[[dialogTitle]]">
+        <div slot="body">
+            <oj-validation-group id="tracker">
+                <oj-form-layout
+                    columns="1"
+                    user-assistance-density="compact"
+                    class="oj-formlayout-full-width">
+                    <oj-c-input-text
+                        label-hint="Clave"
+                        value="{{area.clave}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre"
+                        value="{{area.nombre}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-switch
+                        label-hint="Estatus"
+                        value="{{area.estatus}}">
+                    </oj-switch>
+                </oj-form-layout>
+            </oj-validation-group>
+        </div>
+        <div slot="footer">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-configArea" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Guardar"
+                    chroming="callToAction">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-dialog>
+</div>

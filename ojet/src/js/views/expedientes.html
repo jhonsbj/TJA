@@ -1,0 +1,183 @@
+<div>
+    <h3>Expedientes</h3>
+    <oj-toolbar>
+        <oj-c-button 
+            label="Nuevo"
+            chroming="callToAction"
+            display="[[smScreen() ? 'icons' : 'all']]"
+            on-oj-action="[[onConfigExpediente]]"
+            class="btn-callToAction">
+            <span slot="startIcon">
+                <i class="oj-ux-ico-plus"></i>
+            </span>
+        </oj-c-button>
+        <oj-c-button 
+            label="Editar"
+            chroming="outlined"
+            display="[[smScreen() ? 'icons' : 'all']]">
+            <span slot="startIcon" class="btn-edit">
+                <i class="oj-ux-ico-edit-box"></i>
+            </span>
+        </oj-c-button>
+        <oj-c-input-text 
+            placeholder="Ingrese el número de expediente"
+            class="oj-form-control-max-width-md"
+            label-edge="none">
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless">
+                Buscar
+                <span slot="endIcon" class="oj-ux-ico-search"></span>
+            </oj-c-button>
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless"
+                on-oj-action="[[popSearchAdv]]">
+                Búsqueda Avanzada
+                <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
+            </oj-c-button>
+        </oj-c-input-text>
+    </oj-toolbar>
+    <oj-table 
+        class="app-table demo-table-container" 
+        columns="[[columns]]"
+        data="[[expedientesDP]]"
+        display="grid"
+        selection-mode.row="single"
+        columns-default.sortable="disabled">
+        <template slot="noData">No hay expendientes.</template>
+        <template slot="actionTemplate" data-oj-as="cell">
+            <oj-button 
+                chroming="borderless"
+                display="icons"
+                class="oj-button-md"
+                data-oj-clickthrough="disabled">
+                <span slot="startIcon" class="oj-ux-ico-file-stage"></span>
+                Enviar
+            </oj-button>
+        </template>
+    </oj-table>
+</div>
+
+<oj-dialog 
+    id="dlg-configExpediente" 
+    dialog-title="Nuevo Expediente"
+    class="oj-md-width-3/4">
+    <div slot="body">
+        <oj-form-layout
+            columns="3"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-select-single
+                label-hint="Estado"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-select-single
+                label-hint="Municipio"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-input-date-time
+                label-hint="Fecha y hora de recepción" 
+                value="" 
+                autocomplete="off"
+                required>
+            </oj-input-date-time>
+            <oj-c-select-single
+                label-hint="Área"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-select-single
+                label-hint="Dependencia"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-input-text
+                label-hint="Actor"
+                value="">
+            </oj-c-input-text>
+            <oj-input-date-time
+                label-hint="Fecha y hora de entrega" 
+                value="" 
+                autocomplete="off"
+                required>
+            </oj-input-date-time>
+            <oj-c-select-single
+                label-hint="Tipo proceso"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-select-single
+                label-hint="Tipo documento"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-select-single
+                label-hint="Ponencia"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-label-value colspan="2">
+                <oj-c-text-area
+                    slot="value"
+                    label-hint="Descripción"
+                    value="">
+                </oj-c-text-area>
+            </oj-label-value>
+        </oj-form-layout>
+    </div>
+    <div slot="footer">
+        <oj-toolbar>
+            <oj-c-button 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction"
+                on-oj-action="[[onSaveExpediente]]">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
+
+<oj-popup id="pop-searchAdv" class="k-popup-sm">
+    <div class="k-popup-body-sm">
+        <oj-form-layout 
+            class="oj-formlayout-full-width"
+            user-assistance-density="compact"
+            columns="1">
+            <oj-c-select-single
+                label-hint="Tipo proceso"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-select-single
+                label-hint="Tipo documento"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+        </oj-form-layout>
+    </div>
+    <div class="right-down">
+        <oj-toolbar>
+            <oj-c-button 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[onCancelPopSearchAdv]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Buscar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-popup>
+

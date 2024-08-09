@@ -1,0 +1,43 @@
+<div>
+    <oj-collapsible>
+        <span 
+            class="oj-typography-body-lg oj-typography-semi-bold" 
+            slot="header">
+            Estados
+        </span>
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[dataProvider]]"
+            display="grid"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData"></template>
+            <template slot="actionTemplate" data-oj-as="cell">
+                <oj-switch>
+                </oj-switch>
+            </template>
+        </oj-table>
+    </oj-collapsible>
+    
+    <oj-collapsible>
+        <span 
+            class="oj-typography-body-lg oj-typography-semi-bold" 
+            slot="header">
+            Municipios
+        </span>
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[dataProviderMunicipios]]"
+            display="grid"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData"></template>
+            <template slot="actionTemplate" data-oj-as="cell">
+                <oj-switch>
+                </oj-switch>
+            </template>
+        </oj-table>
+    </oj-collapsible>
+</div>

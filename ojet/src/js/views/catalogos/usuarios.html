@@ -1,0 +1,149 @@
+<div>
+    <oj-toolbar>
+        <oj-c-button 
+            label="Nuevo"
+            chroming="callToAction"
+            display="[[smScreen() ? 'icons' : 'all']]"
+            on-oj-action="[[onNewUser]]">
+            <span slot="startIcon">
+                <i class="oj-ux-ico-plus"></i>
+            </span>
+        </oj-c-button>
+        <oj-c-button 
+            label="Editar"
+            chroming="outlined"
+            display="[[smScreen() ? 'icons' : 'all']]"
+            on-oj-action="[[onEditUser]]">
+            <span slot="startIcon" class="btn-edit">
+                <i class="oj-ux-ico-edit-box"></i>
+            </span>
+        </oj-c-button>
+        <oj-c-input-text 
+            placeholder="Ingrese el nombre o número de expediente"
+            class="oj-form-control-max-width-md"
+            label-edge="none"
+            value="{{filtros.p_search}}">
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless">
+                Buscar
+                <span slot="endIcon" class="oj-ux-ico-search"></span>
+            </oj-c-button>
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless"
+                on-oj-action="[[popSearchAdv]]">
+                Búsqueda Avanzada
+                <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
+            </oj-c-button>
+        </oj-c-input-text>
+    </oj-toolbar>
+    <oj-table 
+        class="app-table" 
+        columns="[[columns]]"
+        data="[[usersDP]]"
+        display="grid"
+        selected="{{selected}}"
+        selection-mode.row="single"
+        columns-default.sortable="disabled">
+        <template slot="noData"></template>
+    </oj-table>
+
+    <oj-dialog
+        id="dlg-configUser" 
+        dialog-title="[[dialogTitle]]">
+        <div slot="body">
+            <oj-validation-group id="tracker">
+                <oj-form-layout
+                    columns="1"
+                    user-assistance-density="compact"
+                    class="oj-formlayout-full-width">
+                    <oj-c-input-text
+                        label-hint="Clave"
+                        value="{{user.clave}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre(s)"
+                        value="{{user.nombre}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Apellido Paterno"
+                        value="{{user.apellido_paterno}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Apellido Materno"
+                        value="{{user.apellido_materno}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Correo"
+                        value="{{user.correo_electronico}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-switch
+                        label-hint="Estatus"
+                        value="{{user.estatus}}">
+                    </oj-switch>
+                </oj-form-layout>
+            </oj-validation-group>
+        </div>
+        <div slot="footer">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-configUser" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Guardar"
+                    chroming="callToAction"
+                    on-oj-action="[[onSaveUser]]">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-dialog>
+
+    <oj-popup id="pop-searchAdv" class="k-popup-sm">
+        <div class="k-popup-body-sm">
+            <oj-form-layout 
+                class="oj-formlayout-full-width"
+                user-assistance-density="compact"
+                columns="1">
+                <oj-switch
+                    label-hint="Usuarios activos"
+                    value="{{filtros.p_estatus}}">
+                </oj-switch>
+                <oj-c-input-text
+                    label-hint="Correo"
+                    value="{{filtros.p_correo}}">
+                </oj-c-input-text>
+                <oj-c-input-text
+                    label-hint="Fecha creación"
+                    value="{{filtros.p_fecha_creacion}}">
+                </oj-c-input-text>
+            </oj-form-layout>
+        </div>
+        <div class="right-down">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-searchAdv" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Buscar"
+                    chroming="callToAction">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-popup>
+</div>

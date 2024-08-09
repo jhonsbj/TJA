@@ -1,0 +1,252 @@
+<div>
+    <h3>Digitalización</h3>
+    <oj-c-radioset 
+        value="{{option}}"
+        direction="row" 
+        options="[[laptopOptions]]"
+        class="oj-sm-margin-4x-bottom">
+    </oj-c-radioset>
+    <oj-toolbar>
+        <oj-c-input-text 
+            placeholder="Ingrese el número de expediente"
+            class="oj-form-control-max-width-md"
+            label-edge="none">
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless">
+                Buscar
+                <span slot="endIcon" class="oj-ux-ico-search"></span>
+            </oj-c-button>
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless"
+                on-oj-action="[[popSearchAdv]]">
+                Búsqueda Avanzada
+                <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
+            </oj-c-button>
+        </oj-c-input-text>
+        <oj-bind-if test="[[option() === 'por_digitalizar']]">
+            <oj-c-button 
+                label="Digitalizar"
+                chroming="callToAction"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[openDigitalizacion]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-rendition-document"></i>
+                </span>
+            </oj-c-button>
+        </oj-bind-if>
+    </oj-toolbar>
+
+    <oj-bind-if test="[[option() === 'digitalizado']]">
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[dp]]"
+            display="grid"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData">No hay expendientes.</template>
+            <template slot="estatusTemplate" data-oj-as="cell">
+                <span class="oj-badge oj-badge-success">
+                <oj-bind-text value="Digitalizado"></oj-bind-text>
+                </span>
+            </template>
+            <template slot="actionTemplate" data-oj-as="cell">
+                <oj-menu-button
+                  chroming="borderless"
+                  class="oj-button-sm"
+                  display="icons"
+                  data-oj-clickthrough="disabled">
+                  Action
+                  <oj-menu slot="menu" on-oj-menu-action="[[menuListener]]">
+                        <oj-option value="view_document">
+                            <span class="oj-ux-ico-view" slot="startIcon"></span>
+                            Ver documento
+                        </oj-option>
+                        <oj-option value="edit_document">
+                            <span class="oj-ux-ico-add-edit-page" slot="startIcon"></span>
+                            Reemplazar documento
+                        </oj-option>
+                        <oj-option value="return_document">
+                            <span class="oj-ux-ico-document-withdraw" slot="startIcon"></span>
+                            Regresar a Oficialía
+                        </oj-option>
+                  </oj-menu>
+                </oj-menu-button>
+            </template>
+        </oj-table>
+    </oj-bind-if>
+    
+    <oj-bind-if test="[[option() === 'por_digitalizar']]">
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columnsExp]]"
+            data="[[expedientesDP]]"
+            display="grid"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData">No hay expendientes.</template>
+            <template slot="actionTemplate" data-oj-as="cell">
+                <oj-button 
+                    chroming="borderless"
+                    display="icons"
+                    class="oj-button-md"
+                    data-oj-clickthrough="disabled">
+                    <span slot="startIcon" class="oj-ux-ico-document-withdraw"></span>
+                    Regresar a Oficialía
+                </oj-button>
+            </template>
+        </oj-table>
+    </oj-bind-if>
+</div>
+
+
+<oj-dialog 
+    id="dlg-digitalizacion" 
+    dialog-title="Selección de archivo para expediente: 4F7B9K2M1R8T6QW"  
+    class="oj-md-width-3/4">
+    <div slot="body" class="oj-sm-margin-4x-top">
+        <oj-form-layout
+            columns="2"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-select-single
+                label-hint="Tipo documento"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+        </oj-form-layout>
+        <oj-file-picker
+            class="file-picker"
+            on-oj-select="[[selectListener]]"
+            on-oj-invalid-select="[[invalidListener]]"
+            on-oj-before-select="[[beforeSelectListener]]"
+            primary-text="Arraste/Seleccione un archivo"
+            secondary-text="Tamaño máximo del archivo: 25MB">
+        </oj-file-picker>
+        <!-- <div id="valid" class="oj-sm-padding-3x-top">
+            Archivo a digitalizar:
+            <oj-bind-text value="[[fileNames]]"></oj-bind-text>
+        </div> -->
+    </div>
+    <div slot="footer">
+        <oj-toolbar>
+            <oj-c-button
+                id="btn-digitalizacion" 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
+
+<oj-dialog
+    id="dlg-actualizarDoc" 
+    dialog-title="Actualizar estatus digitalización">
+    <div slot="body">
+        <oj-form-layout
+            columns="1"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-select-single
+                label-hint=""
+                item-text="label"
+                required>
+            </oj-c-select-single>
+        </oj-form-layout>
+    </div>
+    <div slor="footer">
+        <oj-toolbar>
+            <oj-c-button
+                id="btn-actualizarDoc" 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
+
+<oj-dialog 
+    id="dlg-motivoDevolucion"
+    dialog-title="Motivo de devolución">
+    <div slot="body">
+        <oj-form-layout
+            columns="1"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-text-area
+                label-hint="Motivo"
+                value=""
+                rows="5">
+            </oj-c-text-area>
+        </oj-form-layout>
+    </div>
+    <div slot="footer">
+        <oj-toolbar>
+            <oj-c-button
+                id="btn-motivoDevolucion" 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
+
+
+<oj-popup id="pop-searchAdv" class="k-popup-sm">
+    <div class="k-popup-body-sm">
+        <oj-form-layout 
+            columns="1"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-select-single
+                label-hint="Tipo proceso"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+            <oj-c-select-single
+                label-hint="Tipo documento"
+                item-text="label"
+                required>
+            </oj-c-select-single>
+        </oj-form-layout>
+    </div>
+    <div class="right-down">
+        <oj-toolbar>
+            <oj-c-button
+                id="btn-searchAdv" 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Buscar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-popup>
+
+
+

@@ -29,6 +29,18 @@
       }
     },
 
+    "sweetalert2": {
+        "cwd": "node_modules/sweetalert2/dist",
+        "debug": {
+            "src": "sweetalert2.all.min.js",
+            "path": "libs/sweetalert2/sweetalert2.all.min.js"
+        },
+        "release": {
+            "src": "sweetalert2.all.min.js",
+            "path": "libs/sweetalert2/sweetalert2.all.min.js"
+        }
+    },
+
     "jquery": {
       "cdn": "3rdparty",
       "cwd": "node_modules/jquery/dist",

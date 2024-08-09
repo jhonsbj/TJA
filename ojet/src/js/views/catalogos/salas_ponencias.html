@@ -1,0 +1,192 @@
+<div>
+    <oj-collapsible>
+        <span 
+            class="oj-typography-body-lg oj-typography-semi-bold" 
+            slot="header">
+            Salas Colegiadas
+        </span>
+        <oj-toolbar>
+            <oj-c-button 
+                label="Nuevo"
+                chroming="callToAction"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onNewSala]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-plus"></i>
+                </span>
+            </oj-c-button>
+            <oj-c-button 
+                label="Editar"
+                chroming="outlined"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onEditSala]]">
+                <span slot="startIcon" class="btn-edit">
+                    <i class="oj-ux-ico-edit-box"></i>
+                </span>
+            </oj-c-button>
+        </oj-toolbar>
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[salasDP]]"
+            display="grid"
+            selected="{{selectedSala}}"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData"></template>
+        </oj-table>
+    </oj-collapsible>
+        
+    <oj-collapsible>
+        <span 
+            class="oj-typography-body-lg oj-typography-semi-bold" 
+            slot="header">
+            Ponencias
+        </span>
+        <oj-toolbar>
+            <oj-c-button 
+                label="Nuevo"
+                chroming="callToAction"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-on-action="[[onNewPonencia]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-plus"></i>
+                </span>
+            </oj-c-button>
+            <oj-c-button 
+                label="Editar"
+                chroming="outlined"
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onEditPonencia]]">
+                <span slot="startIcon" class="btn-edit">
+                    <i class="oj-ux-ico-edit-box"></i>
+                </span>
+            </oj-c-button>
+        </oj-toolbar>
+        <oj-table 
+            class="app-table demo-table-container" 
+            columns="[[columns]]"
+            data="[[ponenciasDP]]"
+            display="grid"
+            selected="{{selectedPonencia}}"
+            selection-mode.row="single"
+            columns-default.sortable="disabled">
+            <template slot="noData"></template>
+        </oj-table>
+    </oj-collapsible>
+    
+    
+    <oj-dialog
+        id="dlg-configSala" 
+        dialog-title="[[dialogTitle]]">
+        <div slot="body">
+            <oj-validation-group id="tracker">
+                <oj-form-layout
+                    columns="1"
+                    user-assistance-density="compact"
+                    class="oj-formlayout-full-width">
+                    <oj-c-input-text
+                        label-hint="Clave"
+                        value="{{sala.clave}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre"
+                        value="{{sala.nombre}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre titular"
+                        value="{{sala.nombre_titular}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Apellido paterno"
+                        value="{{sala.apellido_paterno_tit}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Apellido materno"
+                        value="{{sala.apellido_materno_tit}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-switch
+                        label-hint="Estatus"
+                        value="{{sala.estatus}}">
+                    </oj-switch>
+                </oj-form-layout>
+            </oj-validation-group>
+        </div>
+        <div slot="footer">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-configSala" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Guardar"
+                    chroming="callToAction">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-dialog>
+    
+    <oj-dialog
+        id="dlg-configPonencia" 
+        dialog-title="[[dialogTitle]]">
+        <div slot="body">
+            <oj-validation-group id="tracker">
+                <oj-form-layout
+                    columns="1"
+                    user-assistance-density="compact"
+                    class="oj-formlayout-full-width">
+                    <oj-c-input-text
+                        label-hint="Clave"
+                        value="{{ponencia.clave}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre"
+                        value="{{ponencia.nombre}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Nombre titular"
+                        value="{{ponencia.nombre_titular}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Apellido paterno"
+                        value="{{ponencia.apellido_paterno_tit}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-c-input-text
+                        label-hint="Apellido materno"
+                        value="{{ponencia.apellido_materno_tit}}"
+                        required>
+                    </oj-c-input-text>
+                    <oj-switch
+                        label-hint="Estatus"
+                        value="{{ponencia.estatus}}">
+                    </oj-switch>
+                </oj-form-layout>
+            </oj-validation-group>
+        </div>
+        <div slot="footer">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-configPonencia" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Guardar"
+                    chroming="callToAction">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-dialog>    
+</div>
