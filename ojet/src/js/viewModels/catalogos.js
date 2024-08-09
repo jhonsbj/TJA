@@ -4,6 +4,7 @@ define([
     "ojs/ojarraydataprovider",
     "ojs/ojresponsiveutils", 
     "ojs/ojresponsiveknockoututils",
+    "ojs/ojconveyorbelt",
     "ojs/ojnavigationlist", 
     "ojs/ojmodule",
     "ojs/ojtable",

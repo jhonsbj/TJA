@@ -1,21 +1,24 @@
 <div>
     <h3>Catálogos</h3>
-    <oj-tab-bar
-        selection="{{selectedItem}}"
-        display="[[medium() ? 'all' : 'icons']]"
-        layout="[[medium() ? 'stretch' : 'condense']]"
-        edge="top"
-        data="[[dataProvider]]"
-        id="tabbar"
-        class="oj-flex oj-sm-justify-content-center oj-md-justify-content-center oj-lg-justify-content-flex-start">
-        <template slot="itemTemplate" data-oj-as="item">
-            <li>
-                <a href="#">
-                    <span :class="[['oj-tabbar-item-icon ' + item.data.icons]]"></span>
-                    <oj-bind-text value="[[item.data.name]]"></oj-bind-text>
-                </a>
-            </li>
-        </template>
-    </oj-tab-bar>
+    <oj-conveyor-belt id="conveyor">
+        <oj-tab-bar
+            selection="{{selectedItem}}"
+            display="[[medium() ? 'all' : 'icons']]"
+            layout="[[medium() ? 'stretch' : 'condense']]"
+            edge="top"
+            data="[[dataProvider]]"
+            id="tabbar"
+            class="oj-flex oj-sm-justify-content-center oj-md-justify-content-center oj-lg-justify-content-flex-start">
+            <template slot="itemTemplate" data-oj-as="item">
+                <li>
+                    <a href="#">
+                        <span :class="[['oj-tabbar-item-icon ' + item.data.icons]]"></span>
+                        <oj-bind-text value="[[item.data.name]]"></oj-bind-text>
+                    </a>
+                </li>
+            </template>
+        </oj-tab-bar>
+    </oj-conveyor-belt>
+
     <div data-bind="ojModule: modulePath" class="oj-sm-margin-6x-top"></div>
 </div>
