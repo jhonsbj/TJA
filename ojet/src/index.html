@@ -127,7 +127,7 @@
                             </oj-toolbar>
                         </div>
                     </div>
-                    <div 
+                    <!-- <div 
                         role="navigation" 
                         class="oj-web-applayout-max-width oj-web-applayout-navbar">
                         <oj-navigation-list 
@@ -138,15 +138,24 @@
                             item.renderer="[[KnockoutTemplateUtils.getRenderer('navTemplate', true)]]"
                             selection="{{selection.path}}">
                         </oj-navigation-list>
-                    </div>
+                    </div> -->
                 </header>
                 <div class="linea"></div>
                 <div class="linea2"></div>
-                <oj-module 
+
+                <oj-bind-if test="[[initial]]">
+                    <oj-module 
+                        role="main"
+                        class="oj-web-applayout-max-width oj-web-applayout-content"
+                        config="[[moduleConfig]]">
+                        <!-- moduleAdapter.koObservableConfig -->
+                    </oj-module>
+                </oj-bind-if>
+                <!-- <oj-module 
                     role="main" 
                     class="oj-web-applayout-max-width oj-web-applayout-content" 
                     config="[[moduleAdapter.koObservableConfig]]">
-                </oj-module>
+                </oj-module> -->
                 <footer class="oj-web-applayout-footer" role="contentinfo">
                     <div class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-color-secondary oj-typography-body-sm">
                         Copyright © 2024 Poder Judicial del Estado de Puebla.

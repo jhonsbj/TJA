@@ -1,0 +1,38 @@
+<div>
+    <oj-bind-if test="[[menus().length > 0]]">
+        <oj-bind-if test="[[menus().length > 1]]">
+            <div 
+                class="oj-web-applayout-header"
+                style="padding-left: 2%; padding-right: 2%;">
+                <oj-conveyor-belt arrow-visibility="visible">
+                    <oj-navigation-list 
+                        edge="top"
+                        role="presentation"
+                        display="[[medium() ? 'all' : 'icons']]"
+                        class="oj-md-condense oj-sm-justify-content-flex-end"
+                        data="[[menusDP]]"
+                        selection="{{selectedItem}}">
+                        <template slot="itemTemplate" data-oj-as="item">
+                            <li 
+                                :id="[[item.data.html_id]]"
+                                :class="[[{'oj-disabled' : item.data?.disabled === 'true'}]]">
+                                <a href="#">
+                                    <span :class="[['oj-navigationlist-item-icon ' + item.data.iconclass]]"></span>
+                                    <oj-bind-text value="[[item.data.nombre]]"></oj-bind-text>
+                                </a>
+                            </li>
+                        </template>
+                    </oj-navigation-list>
+                </oj-conveyor-belt>
+            </div>
+        </oj-bind-if>
+        <oj-bind-if test="[[tituloMenu]]">
+            <div class="oj-sm-margin-2x-top oj-sm-margin-4x-bottom">
+                <span :class="[[{'oj-typography-heading-sm': smScreen(),'oj-typography-heading-sm': !smScreen()}]]">
+                    <oj-bind-text value="[[tituloMenu]]"></oj-bind-text>
+                </span>
+            </div>
+        </oj-bind-if>
+        <div data-bind="ojModule: modulePath"></div>
+    </oj-bind-if>
+</div>
