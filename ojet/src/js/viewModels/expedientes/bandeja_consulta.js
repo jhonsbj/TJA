@@ -23,7 +23,7 @@ define([
     commonJS,
     mapping,
     ArrayDataProvider) {
-    function ExpendientesViewModel() {
+    function BandejaConsultaExpViewModel() {
 
         var self = this;
 
@@ -106,6 +106,6 @@ define([
         this.transitionCompleted = () => {};
     }
 
-    return ExpendientesViewModel;
+    return BandejaConsultaExpViewModel;
 });
    

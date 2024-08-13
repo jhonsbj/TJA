@@ -6,6 +6,7 @@ define([
     "commonJS",
     "mapping",
     "ojs/ojarraydataprovider",
+    "ojs/ojtable",
     "ojs/ojcollapsible",
     "oj-c/input-text",
     "oj-c/button",

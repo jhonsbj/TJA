@@ -24,6 +24,28 @@
                     <i class="oj-ux-ico-edit-box"></i>
                 </span>
             </oj-c-button>
+            <oj-c-input-text 
+                placeholder="Ingrese el nombre de la dependencia"
+                class="oj-form-control-max-width-md"
+                label-edge="none">
+                <oj-c-button 
+                    slot="end"
+                    display="icons"
+                    size="sm"
+                    chroming="borderless">
+                    Buscar
+                    <span slot="endIcon" class="oj-ux-ico-search"></span>
+                </oj-c-button>
+                <oj-c-button 
+                    slot="end"
+                    display="icons"
+                    size="sm"
+                    chroming="borderless"
+                    on-oj-action="[[popSearchAdv]]">
+                    Búsqueda Avanzada
+                    <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
+                </oj-c-button>
+            </oj-c-input-text>
         </oj-toolbar>
         <oj-table 
             class="app-table demo-table-container" 
@@ -62,6 +84,28 @@
                     <i class="oj-ux-ico-edit-box"></i>
                 </span>
             </oj-c-button>
+            <oj-c-input-text 
+            placeholder="Ingrese el nombre del área"
+            class="oj-form-control-max-width-md"
+            label-edge="none">
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless">
+                Buscar
+                <span slot="endIcon" class="oj-ux-ico-search"></span>
+            </oj-c-button>
+            <oj-c-button 
+                slot="end"
+                display="icons"
+                size="sm"
+                chroming="borderless"
+                on-oj-action="[[popSearchAdv]]">
+                Búsqueda Avanzada
+                <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
+            </oj-c-button>
+        </oj-c-input-text>
         </oj-toolbar>
         <oj-table 
             class="app-table demo-table-container" 
@@ -160,4 +204,38 @@
             </oj-toolbar>
         </div>
     </oj-dialog>
+
+    <oj-popup id="pop-searchAdv" class="k-popup-sm">
+        <div class="k-popup-body-sm">
+            <oj-form-layout 
+                class="oj-formlayout-full-width"
+                user-assistance-density="compact"
+                columns="1">
+                <oj-switch
+                    label-hint="Usuarios activos">
+                </oj-switch>
+                <oj-c-input-text
+                    label-hint="Correo">
+                </oj-c-input-text>
+                <oj-c-input-text
+                    label-hint="Fecha creación">
+                </oj-c-input-text>
+            </oj-form-layout>
+        </div>
+        <div class="right-down">
+            <oj-toolbar>
+                <oj-c-button
+                    id="btn-searchAdv" 
+                    label="Cancelar"
+                    chroming="outlined"
+                    on-oj-action="[[closeDialog]]">
+                </oj-c-button>
+                <oj-c-button 
+                    label="Buscar"
+                    chroming="callToAction">
+                </oj-c-button>
+            </oj-toolbar>
+        </div>
+    </oj-popup>
 </div>
+

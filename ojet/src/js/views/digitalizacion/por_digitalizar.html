@@ -1,24 +1,5 @@
 <div>
-    <h3>Expedientes</h3>
     <oj-toolbar>
-        <oj-c-button 
-            label="Nuevo"
-            chroming="callToAction"
-            display="[[smScreen() ? 'icons' : 'all']]"
-            on-oj-action="[[onConfigExpediente]]"
-            class="btn-callToAction">
-            <span slot="startIcon">
-                <i class="oj-ux-ico-plus"></i>
-            </span>
-        </oj-c-button>
-        <oj-c-button 
-            label="Editar"
-            chroming="outlined"
-            display="[[smScreen() ? 'icons' : 'all']]">
-            <span slot="startIcon" class="btn-edit">
-                <i class="oj-ux-ico-edit-box"></i>
-            </span>
-        </oj-c-button>
         <oj-c-input-text 
             placeholder="Ingrese el número de expediente"
             class="oj-form-control-max-width-md"
@@ -41,10 +22,21 @@
                 <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
             </oj-c-button>
         </oj-c-input-text>
+
+        <oj-c-button 
+            label="Digitalizar"
+            chroming="callToAction"
+            display="[[smScreen() ? 'icons' : 'all']]"
+            on-oj-action="[[openDigitalizacion]]">
+            <span slot="startIcon">
+                <i class="oj-ux-ico-rendition-document"></i>
+            </span>
+        </oj-c-button>
     </oj-toolbar>
+    
     <oj-table 
         class="app-table demo-table-container" 
-        columns="[[columns]]"
+        columns="[[columnsExp]]"
         data="[[expedientesDP]]"
         display="grid"
         selection-mode.row="single"
@@ -56,85 +48,42 @@
                 display="icons"
                 class="oj-button-md"
                 data-oj-clickthrough="disabled">
-                <span slot="startIcon" class="oj-ux-ico-file-stage"></span>
-                Enviar
+                <span slot="startIcon" class="oj-ux-ico-document-withdraw"></span>
+                Regresar a Oficialía
             </oj-button>
         </template>
     </oj-table>
 </div>
 
+
 <oj-dialog 
-    id="dlg-configExpediente" 
-    dialog-title="Nuevo Expediente"
+    id="dlg-digitalizacion" 
+    dialog-title="Selección de archivo para expediente: 4F7B9K2M1R8T6QW"  
     class="oj-md-width-3/4">
-    <div slot="body">
+    <div slot="body" class="oj-sm-margin-4x-top">
         <oj-form-layout
-            columns="3"
+            columns="2"
             user-assistance-density="compact"
             class="oj-formlayout-full-width">
-            <oj-c-select-single
-                label-hint="Estado"
-                item-text="label"
-                required>
-            </oj-c-select-single>
-            <oj-c-select-single
-                label-hint="Municipio"
-                item-text="label"
-                required>
-            </oj-c-select-single>
-            <oj-input-date-time
-                label-hint="Fecha y hora de recepción" 
-                value="" 
-                autocomplete="off"
-                required>
-            </oj-input-date-time>
-            <oj-c-select-single
-                label-hint="Área"
-                item-text="label"
-                required>
-            </oj-c-select-single>
-            <oj-c-select-single
-                label-hint="Dependencia"
-                item-text="label"
-                required>
-            </oj-c-select-single>
-            <oj-c-input-text
-                label-hint="Actor"
-                value="">
-            </oj-c-input-text>
-            <oj-input-date-time
-                label-hint="Fecha y hora de entrega" 
-                value="" 
-                autocomplete="off"
-                required>
-            </oj-input-date-time>
-            <oj-c-select-single
-                label-hint="Tipo proceso"
-                item-text="label"
-                required>
-            </oj-c-select-single>
             <oj-c-select-single
                 label-hint="Tipo documento"
                 item-text="label"
                 required>
             </oj-c-select-single>
-            <oj-c-select-single
-                label-hint="Ponencia"
-                item-text="label"
-                required>
-            </oj-c-select-single>
-            <oj-label-value colspan="2">
-                <oj-c-text-area
-                    slot="value"
-                    label-hint="Descripción"
-                    value="">
-                </oj-c-text-area>
-            </oj-label-value>
         </oj-form-layout>
+        <oj-file-picker
+            class="file-picker"
+            on-oj-select="[[selectListener]]"
+            on-oj-invalid-select="[[invalidListener]]"
+            on-oj-before-select="[[beforeSelectListener]]"
+            primary-text="Arraste/Seleccione un archivo"
+            secondary-text="Tamaño máximo del archivo: 25MB">
+        </oj-file-picker>
     </div>
     <div slot="footer">
         <oj-toolbar>
-            <oj-c-button 
+            <oj-c-button
+                id="btn-digitalizacion" 
                 label="Cancelar"
                 chroming="outlined"
                 on-oj-action="[[closeDialog]]">
@@ -142,18 +91,81 @@
             <oj-c-button 
                 label="Guardar"
                 chroming="callToAction"
-                on-oj-action="[[onSaveExpediente]]">
+                on-oj-action="[[closeDialog]]">
             </oj-c-button>
         </oj-toolbar>
     </div>
 </oj-dialog>
 
+<oj-dialog
+    id="dlg-actualizarDoc" 
+    dialog-title="Actualizar estatus digitalización">
+    <div slot="body">
+        <oj-form-layout
+            columns="1"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-select-single
+                label-hint=""
+                item-text="label"
+                required>
+            </oj-c-select-single>
+        </oj-form-layout>
+    </div>
+    <div slor="footer">
+        <oj-toolbar>
+            <oj-c-button
+                id="btn-actualizarDoc" 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
+
+<oj-dialog 
+    id="dlg-motivoDevolucion"
+    dialog-title="Motivo de devolución">
+    <div slot="body">
+        <oj-form-layout
+            columns="1"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-text-area
+                label-hint="Motivo"
+                value=""
+                rows="5">
+            </oj-c-text-area>
+        </oj-form-layout>
+    </div>
+    <div slot="footer">
+        <oj-toolbar>
+            <oj-c-button
+                id="btn-motivoDevolucion" 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
+
+
 <oj-popup id="pop-searchAdv" class="k-popup-sm">
     <div class="k-popup-body-sm">
         <oj-form-layout 
-            class="oj-formlayout-full-width"
+            columns="1"
             user-assistance-density="compact"
-            columns="1">
+            class="oj-formlayout-full-width">
             <oj-c-select-single
                 label-hint="Tipo proceso"
                 item-text="label"
@@ -168,10 +180,11 @@
     </div>
     <div class="right-down">
         <oj-toolbar>
-            <oj-c-button 
+            <oj-c-button
+                id="btn-searchAdv" 
                 label="Cancelar"
                 chroming="outlined"
-                on-oj-action="[[onCancelPopSearchAdv]]">
+                on-oj-action="[[closeDialog]]">
             </oj-c-button>
             <oj-c-button 
                 label="Buscar"
@@ -180,4 +193,3 @@
         </oj-toolbar>
     </div>
 </oj-popup>
-

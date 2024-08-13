@@ -1,11 +1,4 @@
 <div>
-    <h3>Digitalización</h3>
-    <oj-c-radioset 
-        value="{{option}}"
-        direction="row" 
-        options="[[laptopOptions]]"
-        class="oj-sm-margin-4x-bottom">
-    </oj-c-radioset>
     <oj-toolbar>
         <oj-c-input-text 
             placeholder="Ingrese el número de expediente"
@@ -29,80 +22,45 @@
                 <span slot="endIcon" class="oj-ux-ico-filter-search"></span>
             </oj-c-button>
         </oj-c-input-text>
-        <oj-bind-if test="[[option() === 'por_digitalizar']]">
-            <oj-c-button 
-                label="Digitalizar"
-                chroming="callToAction"
-                display="[[smScreen() ? 'icons' : 'all']]"
-                on-oj-action="[[openDigitalizacion]]">
-                <span slot="startIcon">
-                    <i class="oj-ux-ico-rendition-document"></i>
-                </span>
-            </oj-c-button>
-        </oj-bind-if>
     </oj-toolbar>
 
-    <oj-bind-if test="[[option() === 'digitalizado']]">
-        <oj-table 
-            class="app-table demo-table-container" 
-            columns="[[columns]]"
-            data="[[dp]]"
-            display="grid"
-            selection-mode.row="single"
-            columns-default.sortable="disabled">
-            <template slot="noData">No hay expendientes.</template>
-            <template slot="estatusTemplate" data-oj-as="cell">
-                <span class="oj-badge oj-badge-success">
-                <oj-bind-text value="Digitalizado"></oj-bind-text>
-                </span>
-            </template>
-            <template slot="actionTemplate" data-oj-as="cell">
-                <oj-menu-button
-                  chroming="borderless"
-                  class="oj-button-sm"
-                  display="icons"
-                  data-oj-clickthrough="disabled">
-                  Action
-                  <oj-menu slot="menu" on-oj-menu-action="[[menuListener]]">
-                        <oj-option value="view_document">
-                            <span class="oj-ux-ico-view" slot="startIcon"></span>
-                            Ver documento
-                        </oj-option>
-                        <oj-option value="edit_document">
-                            <span class="oj-ux-ico-add-edit-page" slot="startIcon"></span>
-                            Reemplazar documento
-                        </oj-option>
-                        <oj-option value="return_document">
-                            <span class="oj-ux-ico-document-withdraw" slot="startIcon"></span>
-                            Regresar a Oficialía
-                        </oj-option>
-                  </oj-menu>
-                </oj-menu-button>
-            </template>
-        </oj-table>
-    </oj-bind-if>
-    
-    <oj-bind-if test="[[option() === 'por_digitalizar']]">
-        <oj-table 
-            class="app-table demo-table-container" 
-            columns="[[columnsExp]]"
-            data="[[expedientesDP]]"
-            display="grid"
-            selection-mode.row="single"
-            columns-default.sortable="disabled">
-            <template slot="noData">No hay expendientes.</template>
-            <template slot="actionTemplate" data-oj-as="cell">
-                <oj-button 
-                    chroming="borderless"
-                    display="icons"
-                    class="oj-button-md"
-                    data-oj-clickthrough="disabled">
-                    <span slot="startIcon" class="oj-ux-ico-document-withdraw"></span>
-                    Regresar a Oficialía
-                </oj-button>
-            </template>
-        </oj-table>
-    </oj-bind-if>
+    <oj-table 
+        class="app-table demo-table-container" 
+        columns="[[columns]]"
+        data="[[dp]]"
+        display="grid"
+        selection-mode.row="single"
+        columns-default.sortable="disabled">
+        <template slot="noData">No hay expendientes.</template>
+        <template slot="estatusTemplate" data-oj-as="cell">
+            <span class="oj-badge oj-badge-success">
+            <oj-bind-text value="Digitalizado"></oj-bind-text>
+            </span>
+        </template>
+        <template slot="actionTemplate" data-oj-as="cell">
+            <oj-menu-button
+                chroming="borderless"
+                class="oj-button-sm"
+                display="icons"
+                data-oj-clickthrough="disabled">
+                Action
+                <oj-menu slot="menu" on-oj-menu-action="[[menuListener]]">
+                    <oj-option value="view_document">
+                        <span class="oj-ux-ico-view" slot="startIcon"></span>
+                        Ver documento
+                    </oj-option>
+                    <oj-option value="edit_document">
+                        <span class="oj-ux-ico-add-edit-page" slot="startIcon"></span>
+                        Reemplazar documento
+                    </oj-option>
+                    <oj-option value="return_document">
+                        <span class="oj-ux-ico-document-withdraw" slot="startIcon"></span>
+                        Regresar a Oficialía
+                    </oj-option>
+                </oj-menu>
+            </oj-menu-button>
+        </template>
+    </oj-table>
 </div>
 
 
@@ -129,10 +87,6 @@
             primary-text="Arraste/Seleccione un archivo"
             secondary-text="Tamaño máximo del archivo: 25MB">
         </oj-file-picker>
-        <!-- <div id="valid" class="oj-sm-padding-3x-top">
-            Archivo a digitalizar:
-            <oj-bind-text value="[[fileNames]]"></oj-bind-text>
-        </div> -->
     </div>
     <div slot="footer">
         <oj-toolbar>
@@ -247,6 +201,3 @@
         </oj-toolbar>
     </div>
 </oj-popup>
-
-
-

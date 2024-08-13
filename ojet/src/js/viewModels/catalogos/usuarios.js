@@ -6,6 +6,7 @@ define([
     "commonJS",
     "mapping",
     "ojs/ojarraydataprovider",
+    "ojs/ojtable",
     "ojs/ojvalidationgroup",
     "ojs/ojformlayout",
     "oj-c/input-text",
@@ -60,9 +61,9 @@ define([
         };
 
         self.onNewUser = () => {
-            mapping.fromJS(Usuario.values, self.user);
-            self.dialogTitle("Agregar Usuario");
-            document.getElementById("dlg-configUser").open();
+            // mapping.fromJS(Usuario.values, self.user);
+            // self.dialogTitle("Agregar Usuario");
+            // document.getElementById("dlg-configUser").open();
         };
 
         self.onEditUser = () => {
@@ -73,7 +74,7 @@ define([
                 self.dialogTitle("Editar Usuario");
                 document.getElementById("dlg-configUser").open();
             } else {
-                Sweet.info("Información", "Seleccione un registro para poder editar.");
+                Sweet.rowInfo();
                 return;
             }
         };

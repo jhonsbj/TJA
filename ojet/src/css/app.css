@@ -20,6 +20,10 @@ body {
     overflow-x: hidden;
 }
 
+.oj-web-applayout-header {
+    background-color: rgb(251, 249, 248);
+}
+
 img {
     vertical-align: middle;
 }
