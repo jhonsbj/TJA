@@ -1,12 +1,12 @@
 define([
     "knockout", "ojs/ojkeyset"
 ], function (ko, keyset) {
-    class commonJS {
+    class Utils {
         constructor() {
-            if (!commonJS.instance) {
-                commonJS.instance = this;
+            if (!Utils.instance) {
+                Utils.instance = this;
             }
-            return commonJS.instance;
+            return Utils.instance;
         }
 
         checkValidationGroup = (track = "tracker") => {
@@ -30,9 +30,20 @@ define([
         clearSelectedRow = () => {
             return { row: new keyset.KeySetImpl(), column: new keyset.KeySetImpl() };
         };
+
+        dialog = (id) => {
+            let element = document.getElementById(id);
+            if (element) {
+                if (element.isOpen()) {
+                    element.close();
+                } else {
+                    element.open();
+                }
+            }
+        };
     }
 
-    const instance = new commonJS();
+    const instance = new Utils();
     return instance;
 
 });

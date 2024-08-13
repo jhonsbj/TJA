@@ -3,16 +3,19 @@ define([
     "appController",
     "mapping",
     "ojs/ojarraydataprovider",
+    'ojs/ojkeyset',
     "ojs/ojtable",
     "ojs/ojcollapsible",
     "oj-c/input-text",
     "oj-c/button",
-    "ojs/ojswitch"
+    "ojs/ojswitch",
 ], function(
     ko, 
     global,
     mapping,
-    ArrayDataProvider) {
+    ArrayDataProvider,
+    keyset,
+) {
     function EstadosMunicipiosViewModel() {
 
         var self = this;
@@ -23,16 +26,20 @@ define([
 
         self.estatus = ko.observable(true);
 
+        self.selectedItems = ko.observable({
+            row: new keyset.KeySetImpl(),
+            column: new keyset.KeySetImpl(),
+        });
+
+
         self.columns = [
             { headerText: "Clave", field: "value" },
-            { headerText: "Estado", field: "label" },
-            {
-                headerText: "Estatus",
-                frozenEdge: "end",
-                className: "oj-helper-text-align-center oj-sm-padding-0-vertical",
-                template: "actionTemplate",
-                id: "action",
-            },
+            { headerText: "Nombre", field: "label" },
+            { 
+                headerText: "Estado", 
+                template: "estatusTemplate",
+                field: "estatus" 
+            }, 
         ];
 
         self.estadosDeMexico = [
@@ -107,6 +114,26 @@ define([
         this.dataProviderMunicipios = new ArrayDataProvider(self.municipiosDeMorelos, { keyAttributes: "value" });
 
 
+
+        self.selectedChangedListener = (event) => {
+            self.items = [];
+            let data = this.dataProviderMunicipios.data.map((x) => x.activo_id);
+            if (event.detail.value.row.isAddAll()) {
+                const iterator = event.detail.value.row.deletedValues();
+                iterator.forEach(function (key) {
+                    data.splice(data.indexOf(key), 1);
+                });
+                self.items = data;
+
+            } else {
+                const row = event.detail.value.row;
+                if (row.values().size > 0) {
+                    row.values().forEach(function (key) {
+                        self.items.push(key);
+                    });
+                }
+            }
+        };
 
 
         this.connected = () => {

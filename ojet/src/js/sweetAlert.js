@@ -19,13 +19,13 @@ define(['sweetalert2'], function (Swal) {
     });
 
 
-    function rowInfo() {
+    function rowInfo(text = "Seleccione un registro para poder editar.") {
         Toast.fire({
             icon: "info",
             title: "Información",
-            text: "Seleccione un registro para poder editar."
+            text: text
         });
-    };
+    }
 
     function confirm(title, html) {
         return Swal.fire({

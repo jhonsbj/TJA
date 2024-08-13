@@ -1,42 +1,52 @@
 <div>
-    <oj-collapsible>
+    <oj-collapsible expanded>
         <span 
             class="oj-typography-body-lg oj-typography-semi-bold" 
             slot="header">
             Estados
         </span>
         <oj-table 
-            class="app-table demo-table-container" 
-            columns="[[columns]]"
-            data="[[dataProvider]]"
+            class="app-table"
             display="grid"
-            selection-mode.row="single"
-            columns-default.sortable="disabled">
-            <template slot="noData"></template>
-            <template slot="actionTemplate" data-oj-as="cell">
-                <oj-switch>
-                </oj-switch>
+            edit-mode="rowEdit"
+            data="[[dataProvider]]"
+            columns-default.sortable="disabled"
+            layout="fixed"
+            columns="[[columns]]"
+            selection-mode.row="multiple"
+            selection-mode.column="none"
+            selected="{{selectedItems}}"
+            on-selected-changed="[[selectedChangedListener]]">
+            <template slot="estatusTemplate" data-oj-as="cell">
+                <span class="oj-badge oj-badge-success oj-badge-subtle">
+                <oj-bind-text value="Activo"></oj-bind-text>
+                </span>
             </template>
         </oj-table>
     </oj-collapsible>
     
-    <oj-collapsible>
+    <oj-collapsible expanded>
         <span 
             class="oj-typography-body-lg oj-typography-semi-bold" 
             slot="header">
             Municipios
         </span>
         <oj-table 
-            class="app-table demo-table-container" 
-            columns="[[columns]]"
-            data="[[dataProviderMunicipios]]"
+            class="app-table"
             display="grid"
-            selection-mode.row="single"
-            columns-default.sortable="disabled">
-            <template slot="noData"></template>
-            <template slot="actionTemplate" data-oj-as="cell">
-                <oj-switch>
-                </oj-switch>
+            edit-mode="rowEdit"
+            data="[[dataProviderMunicipios]]"
+            columns-default.sortable="disabled"
+            layout="fixed"
+            columns="[[columns]]"
+            selection-mode.row="multiple"
+            selection-mode.column="none"
+            selected="{{selectedItems}}"
+            on-selected-changed="[[selectedChangedListener]]">
+            <template slot="estatusTemplate" data-oj-as="cell">
+                <span class="oj-badge oj-badge-success oj-badge-subtle">
+                <oj-bind-text value="Activo"></oj-bind-text>
+                </span>
             </template>
         </oj-table>
     </oj-collapsible>

@@ -3,7 +3,7 @@ define([
     "knockout",
     "appController",
     "sweetAlert",
-    "commonJS",
+    "utils",
     "mapping",
     "ojs/ojarraydataprovider",
     "ojs/ojtable",
@@ -15,7 +15,7 @@ define([
     ko, 
     global,
     Sweet,
-    commonJS,
+    utils,
     mapping,
     ArrayDataProvider) {
     function DependenciasAreasViewModel() {
@@ -28,8 +28,8 @@ define([
         self.dependencia = mapping.fromJS(DepArea.dep);
         self.area = mapping.fromJS(DepArea.area);
 
-        self.selectedDependencia = ko.observable(commonJS.clearSelectedRow());
-        self.selectedArea = ko.observable(commonJS.clearSelectedRow());
+        self.selectedDependencia = ko.observable(utils.clearSelectedRow());
+        self.selectedArea = ko.observable(utils.clearSelectedRow());
 
         self.dialogTitle = ko.observable(null);
 
@@ -80,9 +80,15 @@ define([
         };
 
         self.onNewArea = () => {
-            mapping.fromJS(DepArea.area, self.area);
-            self.dialogTitle("Nueva Area");
-            document.getElementById("dlg-configArea").open();
+            const dependencia_id = Array.from(self.selectedDependencia().row.values())?.[0] ?? null;
+            if(dependencia_id){
+                mapping.fromJS(DepArea.area, self.area);
+                self.dialogTitle("Nueva Area");
+                document.getElementById("dlg-configArea").open();
+            } else {
+                Sweet.rowInfo("Seleccione la dependencia a la que pertenecerá el área.");
+            }
+
         };
 
         self.onEditArea = () => {

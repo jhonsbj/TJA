@@ -47,7 +47,8 @@
                 chroming="borderless"
                 display="icons"
                 class="oj-button-md"
-                data-oj-clickthrough="disabled">
+                data-oj-clickthrough="disabled"
+                on-oj-action="[[windowReturnDocument]]">
                 <span slot="startIcon" class="oj-ux-ico-document-withdraw"></span>
                 Regresar a Oficialía
             </oj-button>
@@ -153,7 +154,8 @@
             </oj-c-button>
             <oj-c-button 
                 label="Guardar"
-                chroming="callToAction">
+                chroming="callToAction"
+                on-oj-action="[[onSaveReturnDocument]]">
             </oj-c-button>
         </oj-toolbar>
     </div>

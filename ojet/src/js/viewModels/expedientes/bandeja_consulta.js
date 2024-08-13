@@ -2,7 +2,7 @@ define([
     "knockout",
     "appController",
     "sweetAlert",
-    "commonJS",
+    "utils",
     "mapping",
     "ojs/ojarraydataprovider",
     "ojs/ojtable",
@@ -20,7 +20,7 @@ define([
     ko, 
     global, 
     Sweet,
-    commonJS,
+    utils,
     mapping,
     ArrayDataProvider) {
     function BandejaConsultaExpViewModel() {
@@ -29,6 +29,8 @@ define([
 
         self.smScreen = global.smScreen;
         self.mdScreen = global.mdScreen;
+
+        self.selected = ko.observable(utils.clearSelectedRow());
 
         self.columns = [
             { headerText: "N° Expediente", field: "numero_expediente" },
@@ -79,6 +81,31 @@ define([
 
         self.closeDialog = () => {
             document.getElementById("dlg-configExpediente").close();
+        };
+
+        self.onSendDocument = () => {
+            Sweet.confirm(
+                'Envío a Digitalización',
+                '¿Estás seguro de enviar este expediente?'
+            )
+            .then(result => {
+                if(result.isConfirmed) {
+                    Sweet.msgUpdated(
+                        'Envidado a Digitalización',
+                        'El expediente ha sido enviado extitosamente.'
+                    );
+                }
+            })
+        };
+
+        self.onEditExpediente = () => {
+            const expediente_id = Array.from(self.selected().row.values())?.[0] ?? null;
+            if(expediente_id){
+                
+            } else {
+                Sweet.rowInfo();
+            }
+            
         };
 
         self.onSaveExpediente = () => {

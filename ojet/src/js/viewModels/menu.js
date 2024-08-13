@@ -8,9 +8,12 @@ define([
     "ojs/ojmodule",
     "ojs/ojswitch",
     "ojs/ojconveyorbelt",
-], function (appController, oj, ko, ArrayDataProvider) {
+], function (global, oj, ko, ArrayDataProvider) {
     function menus() {
         var self = this;
+
+        self.smScreen = global.smScreen;
+        self.mdScreen = global.mdScreen;
 
         self.menus = ko.observableArray([]);
         self.menusDP = new ArrayDataProvider(self.menus, { keyAttributes: "html_id" });
@@ -22,16 +25,16 @@ define([
         self.tituloMenu = ko.observable();
 
 
-        const smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
-        self.smScreen = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
-        var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
-        self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
+        // const smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
+        // self.smScreen = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);
+        // var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
+        // self.medium = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
 
         self.menusAll = [
             {
                 path: "dashboard",
                 html_id: "dashboard",
-                titulo: "Dashboard",
+                titulo: "",
                 nombre: "Dashboard",
                 iconclass: "oj-ux-icon-bar-chart",
                 isDefault: 1
@@ -84,6 +87,14 @@ define([
                 titulo: "Estados y Municipios",
                 nombre: "Estados y Municipios",
                 iconclass: "oj-ux-ico-backtomap",
+                isDefault: 0
+            },
+            {
+                path: "catalogos",
+                html_id: "procesos",
+                titulo: "Procesos",
+                nombre: "Procesos",
+                iconclass: "oj-ux-ico-processes-alt",
                 isDefault: 0
             },
             {

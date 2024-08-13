@@ -3,7 +3,7 @@ define([
     "knockout",
     "appController",
     "sweetAlert",
-    "commonJS",
+    "utils",
     "mapping",
     "ojs/ojarraydataprovider",
     "ojs/ojtable",
@@ -17,7 +17,7 @@ define([
     ko, 
     global,
     Sweet,
-    commonJS,
+    utils,
     mapping,
     ArrayDataProvider) {
     function UsuariosViewModel() {
@@ -30,7 +30,7 @@ define([
         self.user = mapping.fromJS(Usuario.values);
         self.filtros = mapping.fromJS(Usuario.filtros);
 
-        self.selected = ko.observable(commonJS.clearSelectedRow());
+        self.selected = ko.observable(utils.clearSelectedRow());
         self.dialogTitle = ko.observable(null);
 
 
@@ -61,9 +61,9 @@ define([
         };
 
         self.onNewUser = () => {
-            // mapping.fromJS(Usuario.values, self.user);
-            // self.dialogTitle("Agregar Usuario");
-            // document.getElementById("dlg-configUser").open();
+            mapping.fromJS(Usuario.values, self.user);
+            self.dialogTitle("Agregar Usuario");
+            document.getElementById("dlg-configUser").open();
         };
 
         self.onEditUser = () => {
@@ -80,10 +80,23 @@ define([
         };
 
         self.onSaveUser = () => {
-            if(commonJS.checkValidationGroup()){
-                console.log('x');
+            if(utils.checkValidationGroup()){
+                Sweet.confirm(
+                    'Registro de usuario',
+                    '¿Estás seguro(a) de registrar al usuario?'
+                ).then(result => {
+                    if(result.isConfirmed) {
+                        document.getElementById("dlg-configUser").close();
+                        Sweet.msgUpdated(
+                            'Registro exitoso',
+                            'El usuario ha sido registrado correctamente.'
+                        );
+                    }
+                })
             }
         };
+
+    
         
         self.closeDialog = (event) => {
             let btn = event.target.id;

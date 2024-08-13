@@ -3,7 +3,7 @@ define([
     "knockout",
     "appController",
     "sweetAlert",
-    "commonJS",
+    "utils",
     "mapping",
     "ojs/ojarraydataprovider",
     "ojs/ojtable",
@@ -16,7 +16,7 @@ define([
     ko, 
     global,
     Sweet,
-    commonJS,
+    utils,
     mapping,
     ArrayDataProvider) {
     function SalasPonenciasViewModel() {
@@ -29,8 +29,8 @@ define([
         self.sala = mapping.fromJS(SalaPonencia.sala);
         self.ponencia = mapping.fromJS(SalaPonencia.ponencia);
 
-        self.selectedSala = ko.observable(commonJS.clearSelectedRow());
-        self.selectedPonencia = ko.observable(commonJS.clearSelectedRow());
+        self.selectedSala = ko.observable(utils.clearSelectedRow());
+        self.selectedPonencia = ko.observable(utils.clearSelectedRow());
 
         self.dialogTitle = ko.observable(null);
 
@@ -94,9 +94,14 @@ define([
         };
 
         self.onNewPonencia = () => {
-            self.dialogTitle("Nueva Ponencia");
-            mapping.fromJS(SalaPonencia.ponencia, self.ponencia);
-            document.getElementById("dlg-configPonencia").open();
+            const sala_id = Array.from(self.selectedSala().row.values())?.[0] ?? null;
+            if(sala_id){
+                self.dialogTitle("Nueva Ponencia");
+                mapping.fromJS(SalaPonencia.ponencia, self.ponencia);
+                document.getElementById("dlg-configPonencia").open();
+            } else {
+                Sweet.rowInfo("Seleccione la sala a la que pertenecerá la ponencia.");
+            }
         };
 
         self.onEditSala = () => {
@@ -108,7 +113,7 @@ define([
                 self.dialogTitle("Editar sala colegiada");
                 document.getElementById("dlg-configSala").open();
             } else {
-                Sweet.info("Información", "Seleccione un registro para poder editar.");
+                Sweet.rowInfo();
                 return;
             }
         };
@@ -121,7 +126,7 @@ define([
                 self.dialogTitle("Editar ponencia");
                 document.getElementById("dlg-configPonencia").open();
             } else {
-                Sweet.info("Información", "Seleccione un registro para poder editar.");
+                Sweet.rowInfo();
                 return;
             }
         };

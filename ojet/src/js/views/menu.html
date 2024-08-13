@@ -8,7 +8,7 @@
                     <oj-navigation-list 
                         edge="top"
                         role="presentation"
-                        display="[[medium() ? 'all' : 'icons']]"
+                        display="[[mdScreen() ? 'all' : 'icons']]"
                         class="oj-md-condense oj-sm-justify-content-flex-end"
                         data="[[menusDP]]"
                         selection="{{selectedItem}}">
@@ -27,8 +27,8 @@
             </div>
         </oj-bind-if>
         <oj-bind-if test="[[tituloMenu]]">
-            <div class="oj-sm-margin-2x-top oj-sm-margin-4x-bottom">
-                <span :class="[[{'oj-typography-heading-sm': smScreen(),'oj-typography-heading-sm': !smScreen()}]]">
+            <div class="oj-sm-margin-4x-top oj-sm-margin-6x-bottom">
+                <span :class="[[{'oj-typography-heading-md': smScreen(),'oj-typography-heading-md': mdScreen()}]]">
                     <oj-bind-text value="[[tituloMenu]]"></oj-bind-text>
                 </span>
             </div>

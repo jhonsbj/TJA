@@ -114,6 +114,7 @@ define([
         this.menuListener = (event, context) => {
             let option = event.detail.selectedValue;
             
+            
             if(option === 'return_document'){
                 self.windowReturnDocument();
             }
@@ -121,10 +122,21 @@ define([
 
         self.windowReturnDocument = () => {
             document.getElementById("dlg-motivoDevolucion").open();
-            // Sweet.confirm(
-            //     'Devolución de Documento',
-            //     '¿Estás seguro de <span><b>Regresar</b></span> el documento a Oficialía?'
-            // );
+        };
+
+        self.onSaveReturnDocument = () => {
+            Sweet.confirm(
+                'Devolución de Documento',
+                '¿Estás seguro(a) de regresar el documento a Oficialía?'
+            ).then(result => {
+                if(result.isConfirmed){
+                    document.getElementById("dlg-motivoDevolucion").close();
+                    Sweet.msgUpdated(
+                        'Devolución Exitosa',
+                        'El documento fue devuelto a Oficialía correctamente.'
+                    );
+                }
+            });
         };
 
     

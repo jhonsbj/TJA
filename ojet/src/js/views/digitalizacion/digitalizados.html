@@ -33,7 +33,7 @@
         columns-default.sortable="disabled">
         <template slot="noData">No hay expendientes.</template>
         <template slot="estatusTemplate" data-oj-as="cell">
-            <span class="oj-badge oj-badge-success">
+            <span class="oj-badge oj-badge-success oj-badge-subtle">
             <oj-bind-text value="Digitalizado"></oj-bind-text>
             </span>
         </template>
@@ -161,7 +161,8 @@
             </oj-c-button>
             <oj-c-button 
                 label="Guardar"
-                chroming="callToAction">
+                chroming="callToAction"
+                on-oj-action="[[onSaveReturnDocument]]">
             </oj-c-button>
         </oj-toolbar>
     </div>

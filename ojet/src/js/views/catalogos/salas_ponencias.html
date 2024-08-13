@@ -1,5 +1,5 @@
 <div>
-    <oj-collapsible>
+    <oj-collapsible expanded>
         <span 
             class="oj-typography-body-lg oj-typography-semi-bold" 
             slot="header">
@@ -37,7 +37,7 @@
         </oj-table>
     </oj-collapsible>
         
-    <oj-collapsible>
+    <oj-collapsible expanded>
         <span 
             class="oj-typography-body-lg oj-typography-semi-bold" 
             slot="header">
@@ -48,7 +48,7 @@
                 label="Nuevo"
                 chroming="callToAction"
                 display="[[smScreen() ? 'icons' : 'all']]"
-                on-on-action="[[onNewPonencia]]">
+                on-oj-action="[[onNewPonencia]]">
                 <span slot="startIcon">
                     <i class="oj-ux-ico-plus"></i>
                 </span>

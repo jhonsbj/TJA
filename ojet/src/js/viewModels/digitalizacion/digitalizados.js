@@ -113,18 +113,31 @@ define([
 
         this.menuListener = (event, context) => {
             let option = event.detail.selectedValue;
-            
+            console.log(option);
             if(option === 'return_document'){
                 self.windowReturnDocument();
+            } else if(option === 'edit_document'){
+                document.getElementById("dlg-digitalizacion").open();
             }
         };
 
         self.windowReturnDocument = () => {
             document.getElementById("dlg-motivoDevolucion").open();
-            // Sweet.confirm(
-            //     'Devolución de Documento',
-            //     '¿Estás seguro de <span><b>Regresar</b></span> el documento a Oficialía?'
-            // );
+        };
+
+        self.onSaveReturnDocument = () => {
+            Sweet.confirm(
+                'Devolución de Documento',
+                '¿Estás seguro(a) de regresar el documento a Oficialía?'
+            ).then(result => {
+                if(result.isConfirmed){
+                    document.getElementById("dlg-motivoDevolucion").close();
+                    Sweet.msgUpdated(
+                        'Devolución Exitosa',
+                        'El documento fue devuelto a Oficialía correctamente.'
+                    );
+                }
+            });
         };
 
     
