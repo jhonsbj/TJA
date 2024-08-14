@@ -61,7 +61,7 @@ define([
         self.expedientes = [
             {
                 id: 1,
-                numero_expediente: "8678109862716589026781058",
+                numero_expediente: "PJE-TJA-1-2024-JO-C1-2-2",
                 tipo_proceso: "Prueba1",
                 fecha: "01/01/2024",
             },
@@ -74,7 +74,7 @@ define([
         self.datos = [
             {
                 id: 1,
-                numero_expediente: "45678301986789135178",
+                numero_expediente: "PJE-TJA-1-2024-JO-C1-2-2",
                 tipo: "Demanda",
                 fecha: "01/01/2021",
                 estatus: "Por digitalizar",

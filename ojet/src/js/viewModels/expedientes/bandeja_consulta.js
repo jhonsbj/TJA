@@ -1,4 +1,5 @@
 define([
+    "interface/Expediente",
     "knockout",
     "appController",
     "sweetAlert",
@@ -17,6 +18,7 @@ define([
     "ojs/ojswitch",
 
 ], function(
+    Expediente,
     ko, 
     global, 
     Sweet,
@@ -33,9 +35,13 @@ define([
         self.selected = ko.observable(utils.clearSelectedRow());
 
         self.columns = [
+            { headerText: "N°", field: "id" },
             { headerText: "N° Expediente", field: "numero_expediente" },
-            { headerText: "Tipo", field: "tipo_proceso" },
-            { headerText: "Fecha", field: "fecha" }, 
+            { headerText: "Proceso", field: "tipo_proceso" },
+            { headerText: "Ponencia", field: "ponencia" }, 
+            { headerText: "Actor", field: "actor" }, 
+            { headerText: "Descripción", field: "descripcion" }, 
+
             {
                 frozenEdge: "end",
                 className: "oj-helper-text-align-center oj-sm-padding-0-vertical",
@@ -47,20 +53,28 @@ define([
         self.expedientes = [
             {
                 id: 1,
-                numero_expediente: "8678109862716589026781058",
+                numero_expediente: "PJE-TJA-1-2024-JO-C1-2-2",
                 tipo_proceso: "Prueba1",
-                fecha: "01/01/2024",
+                ponencia: "Ponencia 1",
+                actor: "María Méndez Pérez",
+                descripcion: "Descripción del expediente 1",
             },
             {
                 id: 2,
-                numero_expediente: "5090145009134561758901869",
+                numero_expediente: "PJE-TJA-2-2024-JO-C1-1-1",
                 tipo_proceso: "Prueba2",
+                ponencia: "Ponencia 2",
+                actor: "Juan Pérez López",
+                descripcion: "Descripción del expediente 2",
                 fecha: "06/05/2024",
             },
             {
                 id: 3,
-                numero_expediente: "1467890135678901345678913",
+                numero_expediente: "PJE-TJA-3-2024-JO-C3-7-7",
                 tipo_proceso: "Prueba3",
+                ponencia: "Ponencia 3",
+                actor: "Karina Reyes Gómez",
+                descripcion: "Descripción del expediente 3",
                 fecha: "10/02/2024",
             }
         ];
