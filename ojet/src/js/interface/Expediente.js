@@ -1,8 +1,8 @@
 define([], function () {
-    const value = {
+    const values = {
         id: null,
         numero_expediente: null,
-        tipo_proceso_id: null,
+        promocion_id: null,
         tipo_documento_id: null,
         usuario_creo_id: null,
         fecha_registro: null,
@@ -12,19 +12,26 @@ define([], function () {
         digitalizado: null,
         estatus: null,
         descripcion: null,
+        municipio_id: null,
+        dependencia_id: null,
+        num_actores: null,
+        num_representantes: null,
+        actRep: [],
     };
 
-    const search = {
+    const actRep = {
+        nombre: null,
+        apellido_paterno: null,
+        apellido_materno: null,
+    };
+
+    const filtros = {
         p_search: null,
     };
 
-    const label = {
-        numero_expediente: "Número de expediente",
-    };
-
     return {
-        value: value,
-        label: label,
-        search: search,
+        values: values,
+        actRep: actRep,
+        filtros: filtros,
     };
 });

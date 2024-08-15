@@ -1,10 +1,10 @@
-<div>
+<div id="expedientes">
     <oj-toolbar>
         <oj-c-button 
             label="Nuevo"
             chroming="callToAction"
             display="[[smScreen() ? 'icons' : 'all']]"
-            on-oj-action="[[onConfigExpediente]]"
+            on-oj-action="[[onNewExpediente]]"
             class="btn-callToAction">
             <span slot="startIcon">
                 <i class="oj-ux-ico-plus"></i>
@@ -60,102 +60,32 @@
                 Enviar
             </oj-button>
         </template>
-    </oj-table>
+    </oj-table>    
 </div>
 
-<oj-dialog 
-    id="dlg-configExpediente" 
-    dialog-title="Nuevo Expediente">
-    <div slot="body">
-        <div class="oj-bg-neutral-30 oj-sm-margin-3x-bottom oj-flex oj-sm-justify-content-center" style="padding: 5px !important; border-radius: 3px;">
-            <span class="oj-typography-body-md oj-typography-semi-bold" >Registro de Demanda</span>
-        </div>
-        <oj-form-layout
-            columns="1"
-            user-assistance-density="compact"
-            class="oj-formlayout-full-width">
-            <oj-input-date-time
-                label-hint="Fecha y hora de recepción" 
-                value="" 
-                autocomplete="off"
-                required>
-            </oj-input-date-time>
-            <oj-c-text-area
-                slot="value"
-                label-hint="Descripción de la Demanda"
-                value=""
-                rows="3">
-            </oj-c-text-area>
-        </oj-form-layout>
 
-        <div class="oj-bg-neutral-30 oj-sm-margin-3x-bottom oj-sm-margin-5x-top oj-flex oj-sm-justify-content-center" style="padding: 5px !important; border-radius: 3px;">
-            <span class="oj-typography-body-md oj-typography-semi-bold">Demandados</span>
-        </div>
-        
-        <oj-form-layout
-            columns="1"
-            user-assistance-density="compact"
-            class="oj-formlayout-full-width">
-            <oj-c-text-area
-                slot="value"
-                label-hint="Demandados"
-                value=""
-                rows="3">
-            </oj-c-text-area>
-        </oj-form-layout>
-        
-        <div class="oj-bg-neutral-30 oj-sm-margin-3x-bottom oj-sm-margin-5x-top oj-flex oj-sm-justify-content-center" style="padding: 5px !important; border-radius: 3px;">
-            <span class="oj-typography-body-md oj-typography-semi-bold">Promoción</span>
-        </div>
-
-        <oj-form-layout
-            columns="1"
-            user-assistance-density="compact"
-            class="oj-formlayout-full-width">
-            <oj-c-select-single
-                item-text="label"
-                label-hint="Promoción"
-                value="">
-            </oj-c-select-single>
-        </oj-form-layout>
-
-        <div class="oj-bg-neutral-30 oj-sm-margin-3x-bottom oj-sm-margin-5x-top oj-flex oj-sm-justify-content-center" style="padding: 5px !important; border-radius: 3px;">
-            <span class="oj-typography-body-md oj-typography-semi-bold">Actor</span>
-        </div>
-
-        <oj-form-layout
-            columns="1"
-            user-assistance-density="compact"
-            class="oj-formlayout-full-width">
-            <oj-c-input-text
-                label-hint="Nombre"
-                value="">
-            </oj-c-input-text>
-            <oj-c-input-text
-                label-hint="Apellido Paterno"
-                value="">
-            </oj-c-input-text>
-            <oj-c-input-text
-                label-hint="Apellido Materno"
-                value="">
-            </oj-c-input-text>
-        </oj-form-layout>
+<!-- Módulo para crear nuevo expediente -->
+<oj-bind-if test="[[moduleNew()]]">
+    <div>
+        <oj-c-button
+            label="Regresar"
+            size="sm"
+            display="[[smScreen() ? 'icons' : 'all']]"
+            chroming="outlined"
+            on-oj-action="[[back]]"
+            class="oj-sm-margin-4x-bottom">
+            <span slot="startIcon">
+                <i class="oj-ux-ico-arrow-left"></i>
+            </span>
+        </oj-c-button>
     </div>
-    <div slot="footer">
-        <oj-toolbar>
-            <oj-c-button 
-                label="Cancelar"
-                chroming="outlined"
-                on-oj-action="[[closeDialog]]">
-            </oj-c-button>
-            <oj-c-button 
-                label="Guardar"
-                chroming="callToAction"
-                on-oj-action="[[onSaveExpediente]]">
-            </oj-c-button>
-        </oj-toolbar>
-    </div>
-</oj-dialog>
+    <oj-module
+        config="[[ModuleElementUtils.createConfig({
+                    name: 'expedientes/nuevo_expediente',
+                    params: {}
+                })]]">
+    </oj-module>
+</oj-bind-if>
 
 <oj-popup id="pop-searchAdv" class="k-popup-sm">
     <div class="k-popup-body-sm">

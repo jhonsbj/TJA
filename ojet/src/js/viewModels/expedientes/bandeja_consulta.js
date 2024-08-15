@@ -6,6 +6,8 @@ define([
     "utils",
     "mapping",
     "ojs/ojarraydataprovider",
+    "ojs/ojmodule-element-utils",
+    "ojs/ojmodule-element",
     "ojs/ojtable",
     "ojs/ojpopup",
     "ojs/ojformlayout",
@@ -24,15 +26,24 @@ define([
     Sweet,
     utils,
     mapping,
-    ArrayDataProvider) {
+    ArrayDataProvider,
+    ModuleElementUtils) {
     function BandejaConsultaExpViewModel() {
 
         var self = this;
 
         self.smScreen = global.smScreen;
         self.mdScreen = global.mdScreen;
+        
+        self.expediente = mapping.fromJS(Expediente.values);
+        self.filtro = mapping.fromJS(Expediente.filtros);
 
         self.selected = ko.observable(utils.clearSelectedRow());
+
+        self.moduleNew = ko.observable(false);
+        self.dataExpediente = ko.observable(null);
+
+        self.ModuleElementUtils = ModuleElementUtils;
 
         self.columns = [
             { headerText: "N°", field: "id" },
@@ -81,6 +92,44 @@ define([
 
         self.expedientesDP = new ArrayDataProvider(self.expedientes, { keyAttributes: "id" });
 
+        self.onNewExpediente = () => {
+            mapping.fromJS(Expediente.values, self.expediente);
+            $("#expedientes").fadeOut("slow", () => {
+                self.moduleNew(true);
+            });
+        };
+
+        self.back = () => {
+            self.moduleNew(false);
+            $("#expedientes").fadeIn("slow");
+        };
+
+
+
+        // self.onConfigExpediente = async () => {
+        //     const expediente_id = Array.from(self.selected().row.values())?.[0] ?? null;
+
+
+        //     if(expediente_id){
+        //         mapping.fromJS(Expediente.values, self.expediente);
+        //     }
+
+        //     if(activo_id && activo_code){
+        //         mapping.fromJS(Reasignacion.value, self.reasign);
+        //         //self.getMotivosTraspaso();
+        //         let data = self.activosDP().data.find(x => x.activo_id == activo_id && x.activo_code == activo_code);
+        //         if(data){
+        //             self.dataActivo(data);
+        //             $("#activosTable").fadeOut("slow", () => {
+        //                 self.viewReasign(true);
+        //             });
+        //         }
+        //     } else {
+        //         self.messages.push(commonJS.infoMsg("Seleccione un activo"));
+        //     }
+        // };
+
+
         self.popSearchAdv = () => {
             document.getElementById("pop-searchAdv").open();
         };
@@ -106,7 +155,7 @@ define([
                 if(result.isConfirmed) {
                     Sweet.msgUpdated(
                         'Envidado a Digitalización',
-                        'El expediente ha sido enviado extitosamente.'
+                        'El expediente ha sido enviado exitosamente.'
                     );
                 }
             })

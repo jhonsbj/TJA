@@ -1,0 +1,240 @@
+<div>
+    <div>
+        <oj-collapsible>
+            <h3 slot="header" :class="[[classCol]]">Registro de Demanda</h3>
+            <oj-form-layout
+                columns="2"
+                user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+                <oj-input-date-time
+                    label-hint="Fecha y hora de recepción" 
+                    value="{{expediente.fecha_registro}}" 
+                    autocomplete="off"
+                    required>
+                </oj-input-date-time>
+                <oj-c-text-area
+                    slot="value"
+                    label-hint="Descripción de la Demanda"
+                    value="{{expediente.descripcion}}">
+                </oj-c-text-area>
+            </oj-form-layout>
+        </oj-collapsible>
+
+        <oj-collapsible>
+            <h3 slot="header" :class="[[classCol]]">Demandados</h3>
+            <oj-form-layout
+                columns="2"
+                user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+                <oj-c-text-area
+                    slot="value"
+                    label-hint="Demandados">
+                </oj-c-text-area>
+            </oj-form-layout>
+        </oj-collapsible>
+
+
+        <oj-collapsible>
+            <h3 slot="header" :class="[[classCol]]">Promoción</h3>
+            <oj-form-layout
+                columns="2"
+                user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+                <oj-c-select-single
+                    item-text="label"
+                    label-hint="Promoción"
+                    value="{{expediente.promocion_id}}">
+                </oj-c-select-single>
+            </oj-form-layout>
+        </oj-collapsible>
+
+        <oj-collapsible>
+            <h3 slot="header" :class="[[classCol]]">Actores</h3>
+            <!-- <div class="demo-flex-display oj-sm-margin-1x-top">
+                <div class="oj-flex">
+                    <div class="oj-flex-item oj-panel oj-sm-padding-8x">
+                        <oj-validation-group id="tracker">
+                            <oj-form-layout 
+                                direction="row" 
+                                max-columns="1" 
+                                user-assistance-density="compact">
+                                <oj-c-input-text 
+                                    value="" 
+                                    label-hint="Nombre correo" 
+                                    required></oj-c-input-text>
+                                <oj-c-input-text 
+                                    value="" 
+                                    label-hint="Asunto" 
+                                    required>
+                                </oj-c-input-text>
+                                <oj-input-date 
+                                    label-hint="Fecha programada para envío" 
+                                    readonly="" 
+                                    required>
+                                </oj-input-date>
+                                <oj-c-text-area 
+                                    value="" 
+                                    label-hint="Comentarios" 
+                                    required>
+                                </oj-c-text-area>
+                            </oj-form-layout>
+                        </oj-validation-group>
+                        <div class="oj-flex oj-sm-justify-content-space-between">
+                            <div>
+                                <oj-c-button
+                                    label="Envío masivo correo">
+                                    <span slot="startIcon">
+                                        <i class="oj-ux-ico-email"></i>
+                                    </span>
+                                </oj-c-button>
+                            </div>
+                            <div>
+                                <oj-c-button
+                                    chroming="callToAction"
+                                    class="oj-sm-padding-2x-end"
+                                    label-hint="Hola">
+                                    <span slot="startIcon">
+                                        <i class="oj-ux-ico-sync"></i>
+                                    </span>
+                                </oj-c-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oj-flex-item oj-panel oj-sm-padding-4x">
+                        <oj-list-view
+                            class="oj-listview-item-padding-off"
+                            data="[[correosProvider]]"
+                            selection-mode="single"
+                            first-selected-item="{{firstSelectedItem}}"
+                            gridlines.item="visible">
+                            <template slot="itemTemplate" data-oj-as="item">
+                                <oj-list-item-layout>
+                                    <oj-avatar slot="leading" background="red" size="xs" role="img" icon-class="oj-ux-ico-email" shape="circle"></oj-avatar>
+                                    <span class="oj-typography-body-md oj-text-color-primary">
+                                        <oj-bind-text value="[[item.item.data.nombre_cuerpo]]"></oj-bind-text>
+                                    </span>
+                                    <span slot="secondary" class="oj-typography-body-sm oj-text-color-secondary">
+                                        <oj-bind-text value="[[item.item.data.created_date + ' - ' + item.item.data.created_by]]"></oj-bind-text>
+                                    </span>
+                                    <div slot="metadata">
+                                        <span :class="[[item.data.estatus == 'INACTIVO' ? 'oj-badge' : 'oj-badge oj-badge-success']]"><oj-bind-text value="[[item.data.estatus]]"></oj-bind-text></span>
+                                    </div>
+                                    <div slot="action">
+                                        <oj-c-button
+                                            disabled="[[item.item.data.estatus == 'INACTIVO']]">
+                                            <span slot="startIcon">
+                                                <i class="oj-ux-ico-settings"></i>
+                                            </span>
+                                        </oj-c-button>
+                                    </div>
+                                </oj-list-item-layout>
+                            </template>
+                        </oj-list-view>
+                    </div>
+                </div>
+            </div>
+        
+
+
+             -->
+
+            <oj-form-layout
+                columns="2"
+                user-assistance-density="compact"
+                class="oj-formlayout-full-width">
+                <oj-c-input-number
+                    label-hint="Número de Actores"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value="{{expediente.num_actores}}">
+                </oj-c-input-number>
+                <oj-c-input-number
+                    label-hint="Número de Representantes"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value="{{expediente.num_representantes}}">
+                </oj-c-input-number>
+            </oj-form-layout>
+            <oj-c-button 
+                label="Capturar Datos" 
+                display="[[smScreen() ? 'icons' : 'all']]"
+                on-oj-action="[[onCaptureActores]]"
+                disabled="[[!expediente.num_actores() || !expediente.num_representantes()]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-contact-edit"></i>
+                </span>
+            </oj-c-button>
+        </oj-collapsible>
+    </div>
+</div>
+
+
+<oj-dialog 
+    id="dlg-captura" 
+    dialog-title="Captura de Datos">
+    <div slot="body">
+        <oj-c-radioset
+            direction="row"
+            value="{{optionCaptura}}"
+            options="[[options]]"
+            class="oj-sm-margin-3x-bottom">
+        </oj-c-radioset>
+        <p>
+            <span class="oj-badge oj-badge-info oj-badge-subtle">
+                <oj-bind-text value="[[labelConteo]]"></oj-bind-text>
+            </span>
+        </p>
+        <oj-form-layout
+            columns="1"
+            user-assistance-density="compact"
+            class="oj-formlayout-full-width">
+            <oj-c-input-text
+                label-hint="Nombre(s)"
+                value="{{nombre}}">
+            </oj-c-input-text>
+            <oj-c-input-text
+                label-hint="Apellido Paterno"
+                value="{{apellidoPaterno}}">
+            </oj-c-input-text>
+            <oj-c-input-text
+                label-hint="Apellido Materno"
+                value="{{apellidoMaterno}}">
+            </oj-c-input-text>
+        </oj-form-layout>
+        <oj-toolbar>
+            <oj-c-button
+                size="sm"
+                display="icons"
+                chroming="outlined"
+                on-oj-action="[[capturaAnterior]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-chevron-left"></i>
+                </span>
+            </oj-c-button>
+            <oj-c-button
+                size="sm"
+                display="icons"
+                chroming="outlined"
+                on-oj-action="[[capturaSiguiente]]">
+                <span slot="startIcon">
+                    <i class="oj-ux-ico-chevron-right"></i>
+                </span>
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+    <div slot="footer">
+        <oj-toolbar>
+            <oj-c-button 
+                label="Cancelar"
+                chroming="outlined"
+                on-oj-action="[[closeDialog]]">
+            </oj-c-button>
+            <oj-c-button 
+                label="Guardar"
+                chroming="callToAction">
+            </oj-c-button>
+        </oj-toolbar>
+    </div>
+</oj-dialog>
